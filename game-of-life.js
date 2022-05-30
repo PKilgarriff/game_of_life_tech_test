@@ -14,6 +14,18 @@ const neitherNegative = (a, b) => {
   return a >= 0 && b >= 0;
 };
 
+const maximumMatrixArea = (matrix) => {
+  return {
+    maxColumnIndex: matrix.length - 1,
+    maxRowIndex: matrix[0].length - 1,
+  };
+};
+
+const isInsideBounds = (matrixArea, x, y) => {
+  const { maxColumnIndex, maxRowIndex } = matrixArea;
+  return neitherNegative(x, y) && x <= maxColumnIndex && y <= maxRowIndex;
+};
+
 const listSurroundingCoordinates = (matrix, currentX, currentY) => {
   const surroundingCells = [
     [currentX - 1, currentY - 1],
@@ -25,8 +37,9 @@ const listSurroundingCoordinates = (matrix, currentX, currentY) => {
     [currentX + 1, currentY + 0],
     [currentX + 1, currentY + 1],
   ];
+  const matrixArea = maximumMatrixArea(matrix);
   const filteredCells = surroundingCells.filter(([x, y]) =>
-    neitherNegative(x, y)
+    isInsideBounds(matrixArea, x, y)
   );
   return filteredCells;
 };
