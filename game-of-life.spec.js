@@ -1,15 +1,8 @@
 const {
-  hello,
   nextGeneration,
   listSurroundingCoordinates,
   countLiveCells,
 } = require("./game-of-life");
-
-describe("hello", () => {
-  test("It says hello world", () => {
-    expect(hello()).toEqual("Hello World");
-  });
-});
 
 describe("nextGeneration", () => {
   test("does nothing to a dead grid", () => {
@@ -116,14 +109,43 @@ describe("listSurroundingCoordinates", () => {
       );
     });
   });
-  describe("countLiveCells", () => {
-    describe("for a 2x2 matrix", () => {
-      test("Returns three for a fully live 2x2 grid", () => {
+});
+
+describe("countLiveCells", () => {
+  describe("for a 2x2 matrix", () => {
+    test("Returns three for a fully live 2x2 grid", () => {
+      let matrix = [
+        [1, 1],
+        [1, 1],
+      ];
+      let expected = 3;
+      let surroundingCells = [
+        [0, 1],
+        [1, 0],
+        [1, 1],
+      ];
+      expect(countLiveCells(matrix, surroundingCells)).toEqual(expected);
+    });
+    test("Returns 0 for a dead 2x2 grid", () => {
+      let matrix = [
+        [0, 0],
+        [0, 0],
+      ];
+      let expected = 0;
+      let surroundingCells = [
+        [0, 1],
+        [1, 0],
+        [1, 1],
+      ];
+      expect(countLiveCells(matrix, surroundingCells)).toEqual(expected);
+    });
+    describe("where half the cells are living", () => {
+      test("Returns 1 when given the co-ordinates around a live cell", () => {
         let matrix = [
-          [1, 1],
-          [1, 1],
+          [1, 0],
+          [0, 1],
         ];
-        let expected = 3;
+        let expected = 1;
         let surroundingCells = [
           [0, 1],
           [1, 0],
@@ -131,46 +153,18 @@ describe("listSurroundingCoordinates", () => {
         ];
         expect(countLiveCells(matrix, surroundingCells)).toEqual(expected);
       });
-      test("Returns 0 for a dead 2x2 grid", () => {
+      test("Returns 2 when given the co-ordinates around a dead cell", () => {
         let matrix = [
-          [0, 0],
-          [0, 0],
-        ];
-        let expected = 0;
-        let surroundingCells = [
+          [1, 0],
           [0, 1],
+        ];
+        let expected = 2;
+        let surroundingCells = [
+          [0, 0],
           [1, 0],
           [1, 1],
         ];
         expect(countLiveCells(matrix, surroundingCells)).toEqual(expected);
-      });
-      describe("where half the cells are living", () => {
-        test("Returns 1 when given the co-ordinates around a live cell", () => {
-          let matrix = [
-            [1, 0],
-            [0, 1],
-          ];
-          let expected = 1;
-          let surroundingCells = [
-            [0, 1],
-            [1, 0],
-            [1, 1],
-          ];
-          expect(countLiveCells(matrix, surroundingCells)).toEqual(expected);
-        });
-        test("Returns 2 when given the co-ordinates around a dead cell", () => {
-          let matrix = [
-            [1, 0],
-            [0, 1],
-          ];
-          let expected = 2;
-          let surroundingCells = [
-            [0, 0],
-            [1, 0],
-            [1, 1],
-          ];
-          expect(countLiveCells(matrix, surroundingCells)).toEqual(expected);
-        });
       });
     });
   });

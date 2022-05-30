@@ -1,7 +1,3 @@
-const hello = () => {
-  return "Hello World";
-};
-
 const nextGeneration = (currentGeneration) => {
   let upcomingGeneration = currentGeneration;
   return [
@@ -56,7 +52,6 @@ const countLiveCells = (matrix, surroundingCells) => {
 };
 
 module.exports = {
-  hello,
   nextGeneration,
   listSurroundingCoordinates,
   countLiveCells,
