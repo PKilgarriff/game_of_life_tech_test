@@ -44,4 +44,20 @@ const listSurroundingCoordinates = (matrix, currentX, currentY) => {
   return filteredCells;
 };
 
-module.exports = { hello, nextGeneration, listSurroundingCoordinates };
+const countLiveCells = (matrix, surroundingCells) => {
+  const cellStatus = surroundingCells.map(([x, y]) => {
+    return matrix[x][y];
+  });
+  const liveCells = cellStatus.reduce(
+    (accumulator, current) => accumulator + current,
+    0
+  );
+  return liveCells;
+};
+
+module.exports = {
+  hello,
+  nextGeneration,
+  listSurroundingCoordinates,
+  countLiveCells,
+};
