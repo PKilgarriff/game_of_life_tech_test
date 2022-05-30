@@ -2,6 +2,7 @@ const {
   nextGeneration,
   listSurroundingCoordinates,
   countLiveCells,
+  mapMatrixToAdjacentLiveCellCounts,
 } = require("./game-of-life");
 
 describe("nextGeneration", () => {
@@ -22,6 +23,17 @@ describe("nextGeneration", () => {
       [0, 0],
     ];
     expect(nextGeneration(singleLiveGrid)).toEqual(expected);
+  });
+  test("a single dead square becomes alive", () => {
+    let mostlyLiveGrid = [
+      [1, 1],
+      [1, 0],
+    ];
+    let expected = [
+      [1, 1],
+      [1, 1],
+    ];
+    expect(nextGeneration(mostlyLiveGrid)).toEqual(expected);
   });
 });
 

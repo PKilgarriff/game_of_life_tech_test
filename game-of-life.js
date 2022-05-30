@@ -1,9 +1,41 @@
 const nextGeneration = (currentGeneration) => {
-  let upcomingGeneration = currentGeneration;
-  return [
-    [0, 0],
-    [0, 0],
-  ];
+  let mappedMatrix = currentGeneration.map((row, rowIndex) => {
+    return row.map((cell, columnIndex) => {
+      const surrounds = listSurroundingCoordinates(
+        currentGeneration,
+        rowIndex,
+        columnIndex
+      );
+      const liveSurrounds = countLiveCells(currentGeneration, surrounds);
+      const currentCellStatus = cell === 1 ? true : false;
+      console.log(
+        `Cell is ${
+          currentCellStatus ? "Alive" : "Dead"
+        } and has ${liveSurrounds} live cells around it`
+      );
+      let nextGenCellStatus;
+      if (currentCellStatus) {
+        if (liveSurrounds < 2) {
+          console.log("Cell dies from underpopulation");
+          nextGenCellStatus = false;
+        } else if (liveSurrounds > 3) {
+          console.log("Cell dies from overpopulation");
+          nextGenCellStatus = false;
+        } else {
+          nextGenCellStatus = true;
+        }
+      } else {
+        if (liveSurrounds === 3) {
+          nextGenCellStatus = true;
+        } else {
+          nextGenCellStatus = false;
+        }
+      }
+      return nextGenCellStatus ? 1 : 0;
+    });
+  });
+  console.log(mappedMatrix);
+  return mappedMatrix;
 };
 
 const neitherNegative = (a, b) => {
@@ -55,4 +87,5 @@ module.exports = {
   nextGeneration,
   listSurroundingCoordinates,
   countLiveCells,
+  mapMatrixToAdjacentLiveCellCounts,
 };
