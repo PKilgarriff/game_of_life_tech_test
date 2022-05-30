@@ -22,12 +22,15 @@ const nextGeneration = (currentGeneration) => {
           console.log("Cell dies from overpopulation");
           nextGenCellStatus = false;
         } else {
+          console.log("Cell remains alive");
           nextGenCellStatus = true;
         }
       } else {
         if (liveSurrounds === 3) {
+          console.log("Cell becomes alive due to reproduction");
           nextGenCellStatus = true;
         } else {
+          console.log("Cell remains dead");
           nextGenCellStatus = false;
         }
       }
@@ -87,5 +90,4 @@ module.exports = {
   nextGeneration,
   listSurroundingCoordinates,
   countLiveCells,
-  mapMatrixToAdjacentLiveCellCounts,
 };

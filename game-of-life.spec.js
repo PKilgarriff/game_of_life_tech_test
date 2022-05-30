@@ -2,7 +2,6 @@ const {
   nextGeneration,
   listSurroundingCoordinates,
   countLiveCells,
-  mapMatrixToAdjacentLiveCellCounts,
 } = require("./game-of-life");
 
 describe("nextGeneration", () => {
