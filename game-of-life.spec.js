@@ -14,4 +14,15 @@ describe("nextGeneration", () => {
     ];
     expect(nextGeneration(deadGrid)).toEqual(deadGrid);
   });
+  test("a single live square dies off", () => {
+    let singleLiveGrid = [
+      [1, 0],
+      [0, 0],
+    ];
+    let expected = [
+      [0, 0],
+      [0, 0],
+    ];
+    expect(nextGeneration(singleLiveGrid)).toEqual(expected);
+  });
 });

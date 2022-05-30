@@ -3,6 +3,7 @@ const hello = () => {
 };
 
 const nextGeneration = (currentGeneration) => {
+  let upcomingGeneration = currentGeneration;
   return [
     [0, 0],
     [0, 0],
