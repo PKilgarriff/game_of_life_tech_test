@@ -1,0 +1,11 @@
+{
+  "name": "game_of_life_tech_test",
+  "version": "1.0.0",
+  "description": "Tech Test for creating a Game of Life simulator",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Paul Kilgarriff",
+  "license": "ISC"
+}
