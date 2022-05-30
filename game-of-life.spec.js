@@ -5,34 +5,49 @@ const {
 } = require("./game-of-life");
 
 describe("nextGeneration", () => {
-  test("does nothing to a dead grid", () => {
-    let deadGrid = [
-      [0, 0],
-      [0, 0],
-    ];
-    expect(nextGeneration(deadGrid)).toEqual(deadGrid);
+  describe("with a 2x2 grid", () => {
+    test("does nothing to a dead grid", () => {
+      let deadGrid = [
+        [0, 0],
+        [0, 0],
+      ];
+      expect(nextGeneration(deadGrid)).toEqual(deadGrid);
+    });
+    test("a single live square dies off", () => {
+      let singleLiveGrid = [
+        [1, 0],
+        [0, 0],
+      ];
+      let expected = [
+        [0, 0],
+        [0, 0],
+      ];
+      expect(nextGeneration(singleLiveGrid)).toEqual(expected);
+    });
+    test("a single dead square becomes alive", () => {
+      let mostlyLiveGrid = [
+        [1, 1],
+        [1, 0],
+      ];
+      let expected = [
+        [1, 1],
+        [1, 1],
+      ];
+      expect(nextGeneration(mostlyLiveGrid)).toEqual(expected);
+    });
   });
-  test("a single live square dies off", () => {
-    let singleLiveGrid = [
-      [1, 0],
-      [0, 0],
-    ];
-    let expected = [
-      [0, 0],
-      [0, 0],
-    ];
-    expect(nextGeneration(singleLiveGrid)).toEqual(expected);
-  });
-  test("a single dead square becomes alive", () => {
-    let mostlyLiveGrid = [
-      [1, 1],
-      [1, 0],
-    ];
-    let expected = [
-      [1, 1],
-      [1, 1],
-    ];
-    expect(nextGeneration(mostlyLiveGrid)).toEqual(expected);
+  describe("with a 3x3 grid", () => {
+    test("a live square surrounded by more than 3 live squares dies", () => {
+      let matrix = [
+        [0, 1, 0],
+        [1, 1, 1],
+        [0, 1, 0],
+      ];
+      let output = nextGeneration(matrix);
+      let squareThatShouldHaveDied = output[1][1];
+      let expected = 0;
+      expect(squareThatShouldHaveDied).toEqual(expected);
+    });
   });
 });
 
